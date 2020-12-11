@@ -7,4 +7,4 @@ edition = "2018"
 [dependencies]
 derive_more = "0.99"
 json = "0.12"
-i3_ipc = "0.10"
+i3_ipc = "0.11"
