@@ -28,7 +28,7 @@ fn main() -> Result<()>
     if let Some(mut active) = client.active_output(&outputs) {
         loop {
             active = (active + 1) % outputs.len();
-            if client.is_active(&outputs[active]) == true {
+            if client.is_active(&outputs[active]) {
                 break;
             }
         }
