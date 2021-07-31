@@ -3,8 +3,7 @@ pub(crate) struct Wm {
 }
 
 impl Wm {
-    fn active_workspace(&mut self) -> Option<usize>
-    {
+    fn active_workspace(&mut self) -> Option<usize> {
         let workspaces = match self.client.get_workspaces() {
             Ok(workspaces) => workspaces,
             Err(_) => return None,
@@ -23,26 +22,21 @@ impl Wm {
 impl crate::Wm for Wm {
     type Output = i3_ipc::reply::Output;
 
-    fn new() -> crate::Result<Self>
-    {
+    fn new() -> crate::Result<Self> {
         use i3_ipc::Connect;
 
         let client = i3_ipc::I3::connect()?;
 
-        Ok(Self {
-            client
-        })
+        Ok(Self { client })
     }
 
-    fn outputs(&mut self) -> crate::Result<Vec<Self::Output>>
-    {
+    fn outputs(&mut self) -> crate::Result<Vec<Self::Output>> {
         let outputs = self.client.get_outputs()?;
 
         Ok(outputs)
     }
 
-    fn active_output(&mut self, outputs: &[Self::Output]) -> Option<usize>
-    {
+    fn active_output(&mut self, outputs: &[Self::Output]) -> Option<usize> {
         let active_workspace = match self.active_workspace() {
             Some(active_workspace) => active_workspace,
             None => return None,
@@ -57,13 +51,11 @@ impl crate::Wm for Wm {
         None
     }
 
-    fn is_active(&mut self, output: &Self::Output) -> bool
-    {
+    fn is_active(&mut self, output: &Self::Output) -> bool {
         output.active
     }
 
-    fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result<()>
-    {
+    fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result<()> {
         let workspace = output.current_workspace.as_ref().unwrap();
         let command = format!("workspace {}", workspace);
 

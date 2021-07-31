@@ -5,7 +5,9 @@ mod i3;
 trait Wm {
     type Output;
 
-    fn new() -> crate::Result<Self> where Self: Sized;
+    fn new() -> crate::Result<Self>
+    where
+        Self: Sized;
     fn outputs(&mut self) -> crate::Result<Vec<Self::Output>>;
     fn active_output(&mut self, outputs: &[Self::Output]) -> Option<usize>;
     fn is_active(&mut self, output: &Self::Output) -> bool;
@@ -22,8 +24,7 @@ enum Error {
 
 type Result<T> = std::result::Result<T, Error>;
 
-fn main() -> Result<()>
-{
+fn main() -> Result<()> {
     let mut client = i3::Wm::new()?;
     let outputs = client.outputs()?;
 
