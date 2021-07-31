@@ -11,7 +11,7 @@ trait Wm {
     fn outputs(&mut self) -> crate::Result<Vec<Self::Output>>;
     fn active_output(&mut self, outputs: &[Self::Output]) -> Option<usize>;
     fn is_active(&mut self, output: &Self::Output) -> bool;
-    fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result<()>;
+    fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result;
 }
 
 #[derive(derive_more::From, Debug)]
@@ -22,9 +22,9 @@ enum Error {
     Json(json::Error),
 }
 
-type Result<T> = std::result::Result<T, Error>;
+type Result<T = ()> = std::result::Result<T, Error>;
 
-fn main() -> Result<()> {
+fn main() -> Result {
     let mut client = i3::Wm::new()?;
     let outputs = client.outputs()?;
 

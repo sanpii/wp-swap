@@ -55,7 +55,7 @@ impl crate::Wm for Wm {
         output.active
     }
 
-    fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result<()> {
+    fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result {
         let workspace = output.current_workspace.as_ref().unwrap();
         let command = format!("workspace {}", workspace);
 
