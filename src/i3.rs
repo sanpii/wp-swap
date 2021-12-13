@@ -3,7 +3,7 @@ pub(crate) struct Wm {
 }
 
 impl Wm {
-    fn active_workspace(&mut self) -> Option<usize> {
+    fn active_workspace(&mut self) -> Option<i32> {
         let workspaces = match self.client.get_workspaces() {
             Ok(workspaces) => workspaces,
             Err(_) => return None,
