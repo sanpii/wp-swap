@@ -14,12 +14,16 @@ trait Wm {
     fn select_current_workspace(&mut self, output: &Self::Output) -> crate::Result;
 }
 
-#[derive(derive_more::From, Debug)]
+#[derive(thiserror::Error, Debug)]
 enum Error {
+    #[error("Not found")]
     NotFound,
-    Io(std::io::Error),
-    Utf8(std::str::Utf8Error),
-    Json(json::Error),
+    #[error("{0}")]
+    Io(#[from] std::io::Error),
+    #[error("{0}")]
+    Utf8(#[from] std::str::Utf8Error),
+    #[error("{0}")]
+    Json(#[from] json::Error),
 }
 
 type Result<T = ()> = std::result::Result<T, Error>;
