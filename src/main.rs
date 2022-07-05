@@ -16,8 +16,6 @@ trait Wm {
 
 #[derive(thiserror::Error, Debug)]
 enum Error {
-    #[error("Not found")]
-    NotFound,
     #[error("{0}")]
     Io(#[from] std::io::Error),
     #[error("{0}")]
