@@ -4,9 +4,8 @@ pub(crate) struct Wm {
 
 impl Wm {
     fn active_workspace(&mut self) -> Option<i32> {
-        let workspaces = match self.client.get_workspaces() {
-            Ok(workspaces) => workspaces,
-            Err(_) => return None,
+        let Ok(workspaces) = self.client.get_workspaces() else {
+            return None;
         };
 
         for workspace in workspaces {
@@ -37,9 +36,8 @@ impl crate::Wm for Wm {
     }
 
     fn active_output(&mut self, outputs: &[Self::Output]) -> Option<usize> {
-        let active_workspace = match self.active_workspace() {
-            Some(active_workspace) => active_workspace,
-            None => return None,
+        let Some(active_workspace) = self.active_workspace() else {
+            return None;
         };
 
         for (n, output) in outputs.iter().enumerate() {
