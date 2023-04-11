@@ -5,6 +5,5 @@ authors = ["Sanpi <sanpi@homecomputing.fr>"]
 edition = "2021"
 
 [dependencies]
-json = "0.12"
 i3_ipc = "0.16"
 thiserror = "1.0"

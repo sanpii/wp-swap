@@ -20,8 +20,6 @@ enum Error {
     Io(#[from] std::io::Error),
     #[error("{0}")]
     Utf8(#[from] std::str::Utf8Error),
-    #[error("{0}")]
-    Json(#[from] json::Error),
 }
 
 type Result<T = ()> = std::result::Result<T, Error>;
