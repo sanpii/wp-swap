@@ -36,9 +36,7 @@ impl crate::Wm for Wm {
     }
 
     fn active_output(&mut self, outputs: &[Self::Output]) -> Option<usize> {
-        let Some(active_workspace) = self.active_workspace() else {
-            return None;
-        };
+        let active_workspace = self.active_workspace()?;
 
         for (n, output) in outputs.iter().enumerate() {
             if output.current_workspace == Some(active_workspace.to_string()) {
