@@ -6,4 +6,4 @@ edition = "2021"
 
 [dependencies]
 i3_ipc = "0.16"
-thiserror = "1.0"
+thiserror = "2.0"
